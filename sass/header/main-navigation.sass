@@ -1,0 +1,104 @@
+@mixin headerBackground
+  background-repeat: no-repeat
+  background-position: center
+  background-size: cover
+  background-image: url("../img/header/code-wp.jpg")
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background: linear-gradient(to bottom, $base-color-overlay-light 0, $base-color-overlay-dark 100%)
+  @media (min-width: $medium)
+    background-attachment: fixed
+    background-position: left center
+
+@mixin title
+  color: $white
+  font-family: 'Dancing Script', cursive
+  font-size: 2rem
+  font-weight: 300
+  text-shadow: $header-text-shadow
+  @media (min-width: $medium)
+    font-size: 3rem
+
+@mixin description
+  color: $white
+  font-family: 'Dancing Script', cursive
+  font-size: 1.5rem
+  font-weight: 300
+  text-shadow: $header-text-shadow
+
+// mobile
+.mobile-header-navigation
+  @include headerBackground
+
+  .navigation-branding
+    .main-title
+      a,
+      a:hover,
+      a:visited
+        @include title
+
+  .menu-toggle,
+    .icon-menu-bars
+      color: $white
+
+// mobile slideout menu
+.main-navigation
+  &.slideout-navigation
+    &.is-open
+      background-color: $base-color
+
+    .inside-navigation
+      .main-nav
+        .menu-item
+          a
+            background-color: transparent
+
+          &.current-menu-item
+            background-color: $lighter-gray-overlay
+            border-radius: .25rem
+
+// viewport larger than mobile
+.site-header
+  @include headerBackground
+
+  .inside-header
+    position: relative
+    z-index: 1
+
+  .site-branding
+    .main-title
+      a
+        @include title
+    .site-description
+      @include description
+
+  .main-navigation
+    background-color: transparent
+
+    .main-nav
+      .menu-item
+        &.current-menu-item
+          a
+            background-color: transparent
+            transform: none
+
+        &.menu-item
+          &:hover
+            a
+              border-radius: .25rem
+              color: $white
+              transform: none
+          &:not(.current-menu-item)
+            &:hover
+              a
+                background-color: $lighter-gray-overlay
+        a
+          color: $white
+          @media (min-width: $medium)
+            font-size: 1.125rem
